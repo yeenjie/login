@@ -44,6 +44,7 @@ public class UserDao {
         return user;
     }
 
+
     public void update(User user){
         String sql="update from user set name = ?,password=? where id=?";
         jdbcTemplate.update(sql,new Object[]{user.getName(),user.getPassword(),user.getId()});

@@ -14,7 +14,7 @@
     <div>
         个人登陆
 
-        <form action="loginServlet">
+        <form action="loginServlet" method="post">
             <input type="text" name="name"></br>
             <input type="text" name="password"><br>
             <input type="submit" value="登陆">

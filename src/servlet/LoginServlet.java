@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet(name = "LoginServlet",urlPatterns = "loginServlet")
+//@WebServlet(name = "LoginServlet",urlPatterns = "/loginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         UserDao userDao = (UserDao) applicationContext.getBean("userDao");
         user = userDao.query(name,password);
         if(user == null){
-            System.out.println("用户名与密码不匹配！");
+            response.sendRedirect("error.jsp");
         }else{
             System.out.println("登陆成功！");
         }
