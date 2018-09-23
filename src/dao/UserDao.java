@@ -44,10 +44,19 @@ public class UserDao {
         return user;
     }
 
-
+    public User queryByName(String name){
+        String sql="select * from user where name =?";
+        User user = null;
+        try{
+            user = (User) jdbcTemplate.queryForObject(sql,new Object[]{name},new BeanPropertyRowMapper(User.class));
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+        return user;
+    }
     public void update(User user){
-        String sql="update from user set name = ?,password=? where id=?";
-        jdbcTemplate.update(sql,new Object[]{user.getName(),user.getPassword(),user.getId()});
+        String sql="update user set name= ?,password=?,datetime=?,logintimes=?,authority=? where id=?";
+        jdbcTemplate.update(sql,new Object[]{user.getName(),user.getPassword(),user.getDatetime(),user.getLogintimes(),user.getAuthority(),user.getId()});
         return;
     }
 
@@ -55,6 +64,18 @@ public class UserDao {
         String sql ="select * from user limit ?,?";
         List<User> users = jdbcTemplate.query(sql,new Object[]{start,count},new BeanPropertyRowMapper(User.class));
         return  users;
+    }
+
+    public Long getAuthority(String name){
+        String sql = "select authority from user where name= ?";
+        Long authority = jdbcTemplate.queryForObject(sql,new Object[]{name},Long.class);
+        return authority;
+    }
+
+    public int getLoginTimes(String name){
+        String sql = "select authority from user where name= ?";
+        int loginTimes = jdbcTemplate.queryForObject(sql,new Object[]{name},Integer.class);
+        return loginTimes;
     }
 
     public List<User> list(){

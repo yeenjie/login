@@ -1,6 +1,6 @@
 package servlet;
 
-import DBUtils.DaoUtil;
+import util.DaoUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
