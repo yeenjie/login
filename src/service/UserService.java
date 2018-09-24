@@ -17,6 +17,9 @@ public class UserService {
         User user = new User();
         user.setPassword(md5Password);
         user.setName(name);
+        user.setLogintimes(0);
+        user.setDatetime(new Date());
+        user.setAuthority(0);
         userDao.add(user);
 
     }
@@ -61,13 +64,15 @@ public class UserService {
 
     public boolean checkLoginTime(String name){
         User user = userDao.queryByName(name);
-        int dayDiff = DateUtil.getDayDiff(new Date(),user.getDatetime());
-        if(dayDiff>=1){
-            resetLoginTime(name);
-            return true;
-        }
-        if(user.getLogintimes()>3){
-            return false;
+        if(user!=null){
+            int dayDiff = DateUtil.getDayDiff(new Date(),user.getDatetime());
+            if(dayDiff>=1){
+                resetLoginTime(name);
+                return true;
+            }
+            if(user.getLogintimes()>3){
+                return false;
+            }
         }
         return true;
     }

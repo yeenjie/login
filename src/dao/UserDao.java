@@ -17,9 +17,8 @@ public class UserDao {
     @Resource(name="jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
     public  User add(User user){
-        System.out.println(jdbcTemplate.toString());
-        String sql ="insert into user(id,name,password) values(null,?,?)";
-        Object args[]={user.getName(),user.getPassword()};
+        String sql ="insert into user values(null,?,?,?,?,?)";
+        Object args[]={user.getName(),user.getPassword(),user.getDatetime(),user.getLogintimes(),user.getAuthority()};
         int id = jdbcTemplate.update(sql,args);
         user.setId(id);
         return user;

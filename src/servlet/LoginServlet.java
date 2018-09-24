@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
@@ -24,19 +25,22 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password= request.getParameter("password");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter printWriter = response.getWriter();
         UserService userService = new UserService();
+        System.out.println("name"+name+",password"+password);
         try {
             if(!userService.checkLoginTime(name)){
-                System.out.println("登陆超过三次");
+                printWriter.print("登陆超过三次");
             }else {
                 if (!userService.query(name, password)) {
                     userService.wrong(name);
-                    response.sendRedirect("error.jsp");
+                    printWriter.print("密码错误！");
                 } else {
                     if (userService.getAuthority(name) == 1) {
-                        response.sendRedirect("listUsers");
+                        printWriter.print("listUsers");
                     } else {
-                        response.sendRedirect("admin.jsp");
+                        printWriter.print("admin");
                     }
 
                 }

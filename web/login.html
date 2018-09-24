@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://how2j.cn/study/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <h1>个人登陆</h1>
+    <form  id="form" action="" method="post">
+        <input id="name" type="text" name="name"></br>
+        <input id="password" type="text" name="password"><br>
+        <input id="login" type="button" value="登陆">
+        <a href="register.jsp"><input type="button" value="注册"></a>
+    </form>
+    <div id="checkResult"></div>
+</div>
+</body>
+
+<script>
+    $(function () {
+        $("#login").click(function(){
+            // alert("触发！");
+            // var data = $("#form").serialize();
+            // var url = "/loginServlet?"+data;
+            // alert(url);
+            // $("#checkResult").load(url);
+
+            var name =$("#name").val();
+            var password = $("#password").val();
+            $.ajax({
+                type:"post",
+                data:{"name":name,"password":password},
+                dataType:"html",
+                url:"/loginServlet",
+                async:false,
+                success:function(data){
+                    //     这一部分做业务处理，data就是你后台返回的html代码片。
+                    // 你可以把它插入到相应的标签里进行显示。
+                    if(data=="admin") {
+                        window.location.href="/admin.jsp";
+                    }else if(data=="listUsers"){
+                        window.location.href="/listUsers";
+                    }else{
+                        alert(data);
+                        window.location.href="/login.html";
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+</html>

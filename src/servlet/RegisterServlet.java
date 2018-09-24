@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "RegisterServlet",urlPatterns = "/registerServlet")
@@ -23,18 +24,21 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
+        String isCheckName = request.getParameter("checkName");
+        PrintWriter out = response.getWriter();
+//        System.out.println(isCheckName);
         if(userService.exist(name))
         {
-            response.sendRedirect("fail.jsp");
+            out.print("exist");
         }
-        else {
+        else if("0".equals(isCheckName)){
             try {
                 userService.add(name,password);
-            } catch (NoSuchAlgorithmException e) {
+                } catch (Exception e) {
                 e.printStackTrace();
-                response.sendRedirect("fail.jsp");
+                out.print("fail");
             }
-            response.sendRedirect("succeed.jsp");
+            out.print("succeed");
         }
     }
 }
