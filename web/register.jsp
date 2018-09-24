@@ -15,6 +15,7 @@
     <form action="/registerServlet" method="post">
         账号：<input id="name" type="text" name="name"><div id="info"></div>
         密码：<input id="password" type="password" name="password">
+        <input id="logcheck" type="text" name="name" size="5" maxlength="4"><a href="login.html"><img border="0" src="logcheck"></a><br>
         <input id="register" type="button" value="注册">
     </form>
     <script>
@@ -22,24 +23,32 @@
             $("#register").click(function(){
                 var name =$("#name").val();
                 var password =$("#password").val();
+                var logcheck = $("#logcheck").val();
                 $.ajax({
                     type:"post",
-                    data:{"name":name,"password":password,"checkName":"0"},
+                    data:{"name":name,"password":password,"checkName":"0","logcheck":logcheck},
                     dataType:"html",
                     url:"/registerServlet",
                     async:false,
                     success:function(data){
                         //     这一部分做业务处理，data就是你后台返回的html代码片。
                         // 你可以把它插入到相应的标签里进行显示。
+
                         if(data=="succeed") {
                             alert("注册成功！");
                             window.location.href="/login.html";
                         }else if(data=="exist"){
                             alert("用户已存在！")
+                            window.location.href="/register.jsp";
                         }else if(data=="fail"){
                             alert("用户加入数据库时出现错误！")
+                            window.location.href="/register.jsp";
+                        }else if(data=="checkfail"){
+                            alert("验证码输出错误！");
+                            window.location.href="/register.jsp";
                         }else{
                             alert("注册出现未知意外！")
+                            window.location.href="/register.jsp";
                         }
                     }
                 });

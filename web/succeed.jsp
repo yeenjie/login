@@ -12,5 +12,6 @@
 </head>
 <body>
     <h1 style="color: green">登陆成功！</h1>
+    <a href="login.jsp">返回</a>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package servlet;
 
 import service.UserService;
+import servlet.yanzhengma.checkUtil;
 import util.DaoUtil;
 import bean.User;
 
@@ -22,23 +23,32 @@ public class RegisterServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean checked = checkUtil.check(request);
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String isCheckName = request.getParameter("checkName");
         PrintWriter out = response.getWriter();
 //        System.out.println(isCheckName);
-        if(userService.exist(name))
+        if("1".equals(isCheckName)&&userService.exist(name))
         {
             out.print("exist");
-        }
-        else if("0".equals(isCheckName)){
-            try {
-                userService.add(name,password);
-                } catch (Exception e) {
-                e.printStackTrace();
-                out.print("fail");
+        }else if("0".equals(isCheckName)){
+            if(checked){
+                if(userService.exist(name)){
+                    out.print("exist");
+                }else{
+                    try {
+                        userService.add(name,password);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        out.print("fail");
+                    }
+                    out.print("succeed");
+                }
+            }else{
+                out.print("checkfail");
             }
-            out.print("succeed");
+
         }
     }
 }
