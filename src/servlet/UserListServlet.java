@@ -16,6 +16,6 @@ public class UserListServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users =new DaoUtil().getUserDao().list();
         req.setAttribute("users",users);
-        req.getRequestDispatcher("listUsers.jsp").forward(req,resp);
+        req.getRequestDispatcher("listUsersAdmin.jsp").forward(req,resp);
     }
 }

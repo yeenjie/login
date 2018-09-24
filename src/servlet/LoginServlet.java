@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter printWriter = response.getWriter();
         UserService userService = new UserService();
+        HttpSession session = request.getSession();
         if(checked){
             if(!userService.exist(name)){
                 printWriter.print("用户不存在！");
@@ -45,10 +46,16 @@ public class LoginServlet extends HttpServlet {
                             userService.wrong(name);
                             printWriter.print("密码错误！");
                         } else {
+//                            System.out.println("成功进入，权限"+userService.getAuthority(name));
                             if (userService.getAuthority(name) == 1) {
+                                session.setAttribute("name",name);
+                                session.setAttribute("authority",1);
                                 printWriter.print("listUsers");
+
                             } else {
-                                printWriter.print("admin");
+                                session.setAttribute("name",name);
+                                session.setAttribute("authority",0);
+                                printWriter.print("pageUser");
                             }
 
                         }

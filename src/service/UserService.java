@@ -77,5 +77,12 @@ public class UserService {
         return true;
     }
 
+    //修改角色
+    public void updateRole(String name,int auth){
+        User user = userDao.queryByName(name);
+        user.setAuthority(auth);
+        userDao.update(user);
+    }
+
 
 }
