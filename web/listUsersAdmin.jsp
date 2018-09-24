@@ -17,14 +17,19 @@
     <tr>
         <td>账号</td>
         <td>密码</td>
+        <td>权限</td>
         <td>删除</td>
+        <td>降低权限</td>>
         <td>增加权限</td>>
     </tr>
     <c:forEach items="${users}" var="user" varStatus="st">
         <tr>
             <td>${user.getName()}</td>
             <td>${user.getPassword()}</td>
+            <td>${user.getAuthority()}</td>
             <td><a href="deleteUser?id=${user.getId()}">删除</a></td>
+            <td><a href="changeRole?name=${user.getName()}&role=0">取消管理员</a> </td>
+            <td><a href="changeRole?name=${user.getName()}&role=1">设置管理员</a> </td>
         </tr>
     </c:forEach>
 
