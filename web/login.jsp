@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="http://how2j.cn/study/jquery.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css">
+<link rel="stylesheet" href="./style/css/login.css">
 <html>
 <head>
     <title>login</title>
@@ -18,7 +18,7 @@
     <form  id="form" action="" method="post">
         账号：<input id="name" type="text" name="name"></br>
         密码：<input id="password" type="password" name="password"><br>
-        验证码：<input id="logcheck" type="text" name="name" size="5" maxlength="4"><a href="login.html"><img border="0" src="logcheck"></a><br>
+        验证码：<input id="logcheck" type="text" name="name" size="5" maxlength="4"><a id="yanzhengma" href="login.jsp"><img border="0" src="logcheck"></a><br>
         <input id="login" type="button" value="登陆">
         <a href="register.jsp"><input type="button" value="注册"></a>
     </form>
@@ -53,7 +53,7 @@
                         window.location.href="/listUsers";
                     }else{
                         alert(data);
-                        window.location.href="/login.html";
+                        window.location.href="/login.jsp";
                     }
                 }
             });

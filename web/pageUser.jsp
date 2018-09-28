@@ -11,6 +11,6 @@
     <title>欢迎界面</title>
 </head>
 <body>
-    <h1>欢迎您！</h1>>
+    <h1>欢迎您！</h1>
 </body>
 </html>

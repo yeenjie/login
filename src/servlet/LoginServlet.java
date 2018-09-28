@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             }else{
                 try {
                     if(!userService.checkLoginTime(name)){
-                        printWriter.print("登陆超过三次");
+                        printWriter.print("账号冻结,请二十四小时后再尝试！");
                     }else {
                         if (!userService.query(name, password)) {
                             userService.wrong(name);

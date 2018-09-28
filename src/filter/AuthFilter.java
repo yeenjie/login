@@ -18,7 +18,7 @@ public class AuthFilter implements Filter {
         HttpServletResponse response =(HttpServletResponse)resp;
 
         String uri = request.getRequestURI();
-        if(uri.endsWith("login.html")||uri.endsWith("register.jsp")||uri.endsWith("logcheck")||uri.endsWith("loginServlet")||uri.endsWith("registerServlet")){
+        if(uri.endsWith("login.jsp")||uri.endsWith(".css")||uri.endsWith(".js")||uri.endsWith(".jpg")||uri.endsWith("register.jsp")||uri.endsWith("logcheck")||uri.endsWith("loginServlet")||uri.endsWith("registerServlet")){
             chain.doFilter(request,response);
             return;
         }
@@ -29,7 +29,7 @@ public class AuthFilter implements Filter {
             authority = (Integer) session.getAttribute("authority");
         }
         if(userName==null){
-            response.sendRedirect("login.html");
+            response.sendRedirect("login.jsp");
             return;
         }else{
             int auth = authority;

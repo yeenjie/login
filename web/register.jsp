@@ -7,17 +7,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="http://how2j.cn/study/jquery.min.js"></script>
+<link rel="stylesheet" href="./style/css/login.css">
 <html>
 <head>
     <title>注册</title>
 </head>
 <body>
-    <form action="/registerServlet" method="post">
+<div id="login-window">
+    <form id="form" action="/registerServlet" method="post">
+        <h2>账号注册</h2>
         账号：<input id="name" type="text" name="name"><div id="info"></div>
-        密码：<input id="password" type="password" name="password">
-        <input id="logcheck" type="text" name="name" size="5" maxlength="4"><a href="login.html"><img border="0" src="logcheck"></a><br>
+        密码：<input id="password" type="password" name="password"><br>
+        验证码：<input id="logcheck" type="text" name="name" size="5" maxlength="4"><a href="register.jsp"><img id="yanzhengma" border="0" src="logcheck"></a><br>
         <input id="register" type="button" value="注册">
+        <a href="login.jsp"><input type="button" value="返回"></a>
     </form>
+</div>
     <script>
         $(function () {
             $("#register").click(function(){
@@ -36,7 +41,7 @@
 
                         if(data=="succeed") {
                             alert("注册成功！");
-                            window.location.href="/login.html";
+                            window.location.href="/login.jsp";
                         }else if(data=="exist"){
                             alert("用户已存在！")
                             window.location.href="/register.jsp";
@@ -76,5 +81,6 @@
 
         });
     </script>
+
 </body>
 </html>

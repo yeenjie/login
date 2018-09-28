@@ -10,10 +10,11 @@
 <html>
 <head>
     <title>list</title>
+    <link rel="stylesheet" href="./style/css/admin.css">
 </head>
 <body>
-<h1>管理员界面</h1>
-<table align="center" border="1" cellpadding="0">
+<h1 id="title">管理员界面</h1>
+<table id="table" align="center" border="1" cellpadding="0">
     <tr>
         <td>账号</td>
         <td>密码</td>
